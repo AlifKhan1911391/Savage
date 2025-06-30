@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uchiha Defense</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #c00;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: radial-gradient(#300 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            padding: 30px;
+            border: 2px solid #c00;
+            border-radius: 5px;
+            box-shadow: 0 0 25px rgba(200, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 8px #f00;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+        }
+        
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #c00;
+            border-radius: 3px;
+            margin: 20px 0;
+            box-shadow: 0 0 15px rgba(200, 0, 0, 0.4);
+        }
+        
+        button {
+            background-color: #300;
+            color: #f00;
+            border: 1px solid #c00;
+            padding: 12px 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+        
+        button:hover {
+            background-color: #500;
+            box-shadow: 0 0 10px #f00;
+        }
+        
+        #response-text {
+            min-height: 24px;
+            margin: 20px 0;
+            font-size: 1.3rem;
+            color: #f55;
+            font-weight: bold;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>THIS LEVEL OF GENJUTSU DOESN'T WORK ON ME</h1>
+        
+        <img src="https://raw.githubusercontent.com/AlifKhan1911391/Savage/refs/heads/main/images%20(2).jpeg" alt="Uchiha Power">
+        
+        <button id="genjutsu-btn">ATTEMPT GENJUTSU</button>
+        
+        <div id="response-text"></div>
+        
+        <audio id="bg-music" autoplay loop>
+            <source src="https://github.com/AlifKhan1911391/Savage/raw/refs/heads/main/Itachi%20Uchiha%20-%20Orignal%20Soundtrack%20(extended)(MP3_160K).mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script>
+        // Auto-play music with interaction fallback
+        document.addEventListener('DOMContentLoaded', () => {
+            const bgMusic = document.getElementById('bg-music');
+            bgMusic.volume = 0.4;
+            
+            // Attempt autoplay
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                    // If autoplay fails, play after first interaction
+                    document.body.addEventListener('click', () => {
+                        bgMusic.play();
+                    }, { once: true });
+                });
+            }
+        });
+
+        // Genjutsu button interaction
+        document.getElementById('genjutsu-btn').addEventListener('click', function() {
+            const response = document.getElementById('response-text');
+            response.textContent = "Try harder loser";
+            
+            // Reset animation to replay it
+            response.style.animation = 'none';
+            void response.offsetWidth; // Trigger reflow
+            response.style.animation = 'fadeIn 0.5s';
+            
+            // Button press effect
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
